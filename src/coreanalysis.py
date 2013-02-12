@@ -218,9 +218,13 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                 for n in range(0,len(ew)):
                     negew.append(-1*ew[n])
                     negud.append(-1*ud[n])   
-                    
-                zfp = pylab.figure() #makes the zeiderfeld plot figure    
-                zfp = pylab.plot(ns,negew,"-o", label='ns vs negew') + pylab.plot(ns,negud,"-o",label='ns vs negud') #actually does the plotting
+                pylab.plot(ns,negew,"-o", label='ns vs negew') + pylab.plot(ns,negud,"-o",label='ns vs negud') #actually does the plotting
+                pylab.xlabel('-EW and -UD (A/m)')
+                pylab.ylabel('NS (A/m)')
+                pylab.title('Zijderfeld')
+                pylab.axhline(linewidth=1, color='k')
+                pylab.axvline(linewidth=1, color='k')
+                
                 labels = ['{0}'.format(foo) for foo in range(len(ns))]
                 for label, x, y in zip(labels, ns, negew ):
                     pylab.annotate(

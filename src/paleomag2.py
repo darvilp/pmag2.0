@@ -144,4 +144,6 @@ for files in os.listdir("."):
 for foo in range(0,len(pdftodelete)):
     os.remove(pdftodelete[foo])'''
 print 'Done'
+print 'Press any key to exit'
+input()
     
