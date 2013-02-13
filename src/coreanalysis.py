@@ -280,7 +280,7 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                     print 'There are '+str(len(thetalistew))+' slope segments steps for this core'
                     print 'Enter the number of the segments you want to use'
                     pylab.show(block=False)
-                    pylab.savefig("Zijderveld.png")
+                    pylab.savefig(cores[i]+"Zijderveld.png")
                     lng = input()            
                     for n in range(0,lng):#basically, compares the slopes of the lines to see if they are similar. Puts a 1 if similar and 0 if not 
                         cp=[]

@@ -170,10 +170,14 @@ def stereoplot(strike,dip,filename):
     rho1 = [bigr*pylab.tan(pylab.pi/4 - ((foo)/2)) for foo in plunger1]
         # polarb plots ccl from 3:00, so convert to cl from 12:00
     #pylab.polar(pylab.pi/2-trendr1,rho1,'o')
+    pylab.plot(9000,90000,'o',markerfacecolor="b",label='Positive Dip')
+    pylab.plot(9000,90000,'o',markerfacecolor="w",label='Negative Dip')      
+    pylab.legend(loc=1) 
     for n in range(0,len(strike)):
         if dip[n] > 0:
-            pylab.plot(rho1[n]*pylab.cos(pylab.pi/2-trendr1[n]),rho1[n]*pylab.sin(pylab.pi/2-trendr1[n]),'o',markerfacecolor="b")
+            pylab.plot(rho1[n]*pylab.cos(pylab.pi/2-trendr1[n]),rho1[n]*pylab.sin(pylab.pi/2-trendr1[n]),'o',markerfacecolor="b",label='Positive Dip')
         else:
-            pylab.plot(rho1[n]*pylab.cos(pylab.pi/2-trendr1[n]),rho1[n]*pylab.sin(pylab.pi/2-trendr1[n]),'o',markerfacecolor="w")
+            pylab.plot(rho1[n]*pylab.cos(pylab.pi/2-trendr1[n]),rho1[n]*pylab.sin(pylab.pi/2-trendr1[n]),'o',markerfacecolor="w",label='Negative Dip')
+         
     '''above is self'''
     pylab.axis([-bigr, bigr, -bigr, bigr])
