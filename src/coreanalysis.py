@@ -208,6 +208,12 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                 normmagslist = [foo *1/magslist[0] for foo in magslist]
                 pylab.plot(demagsteps,magslist,"-o")
                 pylab.plot(demagsteps,normmagslist,"-o")
+                
+                pylab.xlabel('Demag Step (mT)')
+                pylab.ylabel('Magnitude (A/m)')
+                pylab.title('Magnitude')
+                pylab.axhline(linewidth=1, color='k')
+                pylab.axvline(linewidth=1, color='k')
                 pylab.savefig(cores[i]+"magnitudeplot.png")
                 addimagepage.addimagepage(cores[i]+"magnitudeplot",".png")
                 pylab.clf()
@@ -218,12 +224,14 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                 for n in range(0,len(ew)):
                     negew.append(-1*ew[n])
                     negud.append(-1*ud[n])   
-                pylab.plot(ns,negew,"-o", label='ns vs negew') + pylab.plot(ns,negud,"-o",label='ns vs negud') #actually does the plotting
+                pylab.plot(ns,negew,"-o", label='NS vs -EW') + pylab.plot(ns,negud,"-o",label='NS vs -UD') #actually does the plotting
                 pylab.xlabel('-EW and -UD (A/m)')
                 pylab.ylabel('NS (A/m)')
-                pylab.title('Zijderfeld')
+                pylab.title('Zijderveld Plot')
                 pylab.axhline(linewidth=1, color='k')
                 pylab.axvline(linewidth=1, color='k')
+                pylab.axis('equal')
+                pylab.legend(loc=1)
                 
                 labels = ['{0}'.format(foo) for foo in range(len(ns))]
                 for label, x, y in zip(labels, ns, negew ):
