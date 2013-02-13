@@ -133,7 +133,7 @@ pylab.savefig("Paleoplot of "+sitesstring+".png")
 pylab.show(block=False)
 
 stereoplot.stereoplot(Dmsitelist,Imsitelist,sites)
-
+pylab.show()
 '''
 os.getcwd()
 pdftodelete=[]

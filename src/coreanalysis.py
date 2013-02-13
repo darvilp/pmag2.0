@@ -182,9 +182,7 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                 tableline.insert(0, ['TR','Intensity','Dec','Inc'])
                 elements=[]
                 t=Table(tableline)
-                doc = SimpleDocTemplate(cores[i]+"table.pdf")
-                elements.append(t)
-                doc.build(elements)
+                
                 
                 
                 for n in range (0,len(inclination)): #loop does the math to take inclinations and declinations and turn them into core ns, ew, ud
@@ -199,25 +197,22 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                 inclination=[float(foo) for foo in inclination]
                
                 pylab.clf()
-                
+                pylab.subplot(2,2,2)
                 stereoplot.stereoplot(declination,inclination,textfilename[i])
-                pylab.savefig(cores[i]+"stereonet.png")
-                addimagepage.addimagepage(cores[i]+"stereonet",".png")
-                pylab.clf()
                 
+                pylab.subplot(2,2,3)
                 normmagslist = [foo *1/magslist[0] for foo in magslist]
                 pylab.plot(demagsteps,magslist,"-o")
                 pylab.plot(demagsteps,normmagslist,"-o")
-                
                 pylab.xlabel('Demag Step (mT)')
                 pylab.ylabel('Magnitude (A/m)')
                 pylab.title('Magnitude')
                 pylab.axhline(linewidth=1, color='k')
                 pylab.axvline(linewidth=1, color='k')
-                pylab.savefig(cores[i]+"magnitudeplot.png")
-                addimagepage.addimagepage(cores[i]+"magnitudeplot",".png")
-                pylab.clf()
                 
+                
+                
+                pylab.subplot(2,2,1)
                 #makes plots
                 negew= [] #zeiderfeld plots use negative axis 
                 negud= []
@@ -232,7 +227,19 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                 pylab.axvline(linewidth=1, color='k')
                 pylab.axis('equal')
                 pylab.legend(loc=1)
+                pylab.tight_layout()
+                pylab.savefig(cores[i]+"_pack.png")
+                addimagepage.addimagepage(cores[i],"_pack.png")
+                pylab.clf()
                 
+                pylab.plot(ns,negew,"-o", label='NS vs -EW') + pylab.plot(ns,negud,"-o",label='NS vs -UD') #actually does the plotting
+                pylab.xlabel('-EW and -UD (A/m)')
+                pylab.ylabel('NS (A/m)')
+                pylab.title('Zijderveld Plot')
+                pylab.axhline(linewidth=1, color='k')
+                pylab.axvline(linewidth=1, color='k')
+                pylab.axis('equal')
+                pylab.legend(loc=1)                
                 labels = ['{0}'.format(foo) for foo in range(len(ns))]
                 for label, x, y in zip(labels, ns, negew ):
                     pylab.annotate(
@@ -244,9 +251,6 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                         label, 
                         xy = (x, y), xytext = (0, 10),
                         textcoords = 'offset points', ha = 'right', va = 'bottom') 
-                pylab.savefig(textfilename[i].strip(".txt")+"zf.png") #saves the figure in the folder
-                addimagepage.addimagepage(cores[i]+"zf",".png")
-    
                 #Note: do not use i any more!
                 
                 #Regression section for simulated/suggested high coercivity pick.
@@ -276,6 +280,7 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                     print 'There are '+str(len(thetalistew))+' slope segments steps for this core'
                     print 'Enter the number of the segments you want to use'
                     pylab.show(block=False)
+                    pylab.savefig("Zijderveld.png")
                     lng = input()            
                     for n in range(0,lng):#basically, compares the slopes of the lines to see if they are similar. Puts a 1 if similar and 0 if not 
                         cp=[]
@@ -430,23 +435,3 @@ def coreanalysis(si,sites,filepath,i,coresinsitelist,textfilename,maxerror,cores
                 #    Rlist.append(R)
                 #N=N+len(ewhcoerce)
                 #Above is dec/inc in rad
-                
-                output = PdfFileWriter()
-                input1 = PdfFileReader(file(cores[i]+"zf.pdf", "rb"))
-                input2 = PdfFileReader(file(cores[i]+"magnitudeplot.pdf", "rb"))
-                input3 = PdfFileReader(file(cores[i]+'stereonet.pdf', "rb"))
-                input4 = PdfFileReader(file(cores[i]+'table.pdf', "rb"))
-                output.addPage(input1.getPage(0))
-                output.addPage(input2.getPage(0))
-                output.addPage(input3.getPage(0))
-                output.addPage(input4.getPage(0))
-                #outputStream = file(cores[i]+'.pdf', "wb")
-                outputStream = file(cores[i]+'.pdf', "wb")
-                output.write(outputStream)
-                outputStream.close()
-                
-                '''
-                os.remove(cores[i]+"zf.pdf")
-                os.remove(cores[i]+"magnitudeplot.pdf")
-                os.remove(cores[i]+"stereonet.pdf")
-                os.remove(cores[i]+"table.pdf")'''

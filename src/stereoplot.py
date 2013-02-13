@@ -73,7 +73,7 @@ def stereoplot(strike,dip,filename):
         thr = pylab.arange(thetaar[i],thetabr[i]+pylab.pi/180,pylab.pi/180)
         xunit = x[i] + r[i]*pylab.cos(pylab.radians(thd))
         yunit = y[i] + r[i]*pylab.sin(pylab.radians(thd))
-        p = pylab.plot(xunit,yunit,'b',lw=.5)
+        #p = pylab.plot(xunit,yunit,'b',lw=.5) #commented out to remove small verticle lines
         pylab.hold(True)   
     
     
@@ -143,8 +143,8 @@ def stereoplot(strike,dip,filename):
         if pylab.mod(phi[i],10) == 0:
             p = pylab.plot(xunit,yunit,'b',lw=1)
             angg = thetaad[i]
-        else:
-            p = pylab.plot(xunit,yunit,'b',lw=0.5)
+        #else: #Commented out to remove the small horizontal lines
+            #p = pylab.plot(xunit,yunit,'b',lw=0.5)
         pylab.hold(True)
     
     # Draw thick north-south and east-west diameters
