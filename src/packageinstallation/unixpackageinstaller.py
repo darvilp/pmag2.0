@@ -36,5 +36,5 @@ pipscript.close()
 
 subprocess.call(['sudo', 'distribute_setup.py'])
 subprocess.call(['sudo', 'get-pip.py'])
-subprocess.call(['sudo', 'unixscript.command'])
+subprocess.call(['sudo', 'unixscript.sh'])
 
