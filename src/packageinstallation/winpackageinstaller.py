@@ -31,9 +31,11 @@ pipscript.writelines('pip install matplotlib numpy scipy pypdf sphinx reportlab\
 pipscript.writelines('pip install http://sourceforge.net/projects/matplotlib/files/matplotlib-toolkits/basemap-1.0.6/basemap-1.0.6.tar.gz/download')
 pipscript.close()
 
-os.system('distribute_setup.py')  # runs the local file distribute_setup.py
-os.system('get-pip.py')
-os.system('packageinstaller.bat')
+import subprocess
+subprocess.call(['distribute_setup.py'], shell=True)
+subprocess.call(['get-pip.py'], shell=True)
+subprocess.call(['packageinstaller.bat'], shell=True)
+
 
 
 

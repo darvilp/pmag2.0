@@ -29,11 +29,11 @@ import sys
 print sys.executable
 pipscript = open("unixscript.sh", 'w')
 pipscript.writelines('cd ' + sys.executable + "scripts\\\n")
-pipscript.writelines('sudo pip install matplotlib numpy scipy pypdf sphinx reportlab\n')
-pipscript.writelines('sudo pip install http://sourceforge.net/projects/matplotlib/files/matplotlib-toolkits/basemap-1.0.6/basemap-1.0.6.tar.gz/download')
+pipscript.writelines('pip install matplotlib numpy scipy pypdf sphinx reportlab\n')
+pipscript.writelines('pip install http://sourceforge.net/projects/matplotlib/files/matplotlib-toolkits/basemap-1.0.6/basemap-1.0.6.tar.gz/download')
 pipscript.close()
-import os
-os.system('distribute_setup.py')
-os.system('get-pip.py')
-os.system('unixscript.sh')
 
+import subprocess
+subprocess.call(['sudo', 'distribute_setup.py'], shell=True)
+subprocess.call(['sudo', 'get-pip.py'], shell=True)
+subprocess.call(['sudo', 'unixscript.sh'], shell=True)
