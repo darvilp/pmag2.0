@@ -22,8 +22,7 @@ localFile = open('get-pip.py', 'w')
 localFile.write(u.read())
 localFile.close()
 
-os.system('distribute_setup.py')  # runs the local file distribute_setup.py
-os.system('get-pip.py')
+
 
 import sys
 pipscript = open("packageinstaller.bat", 'w')
@@ -31,8 +30,10 @@ pipscript.writelines('cd ' + sys.executable.rstrip('python.exe') + "scripts\\\n"
 pipscript.writelines('pip install matplotlib numpy scipy pypdf sphinx reportlab\n')
 pipscript.writelines('pip install http://sourceforge.net/projects/matplotlib/files/matplotlib-toolkits/basemap-1.0.6/basemap-1.0.6.tar.gz/download')
 pipscript.close()
-os.system('packageinstaller.bat')
 
+os.system('distribute_setup.py')  # runs the local file distribute_setup.py
+os.system('get-pip.py')
+os.system('packageinstaller.bat')
 
 
 
