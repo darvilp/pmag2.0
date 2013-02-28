@@ -28,12 +28,13 @@ localFile.close()
 import sys
 print sys.executable
 pipscript = open("unixscript.sh", 'w')
-pipscript.writelines('cd ' + sys.executable + "scripts\\\n")
+pipscript.writelines('cd ' + sys.executable.rstrip('python.exe') + "/scripts\n")  # note that unix uses forward slash for paths
 pipscript.writelines('pip install matplotlib numpy scipy pypdf sphinx reportlab\n')
 pipscript.writelines('pip install http://sourceforge.net/projects/matplotlib/files/matplotlib-toolkits/basemap-1.0.6/basemap-1.0.6.tar.gz/download')
 pipscript.close()
 
 import subprocess
-subprocess.call(['sudo', 'distribute_setup.py'], shell=True)
-subprocess.call(['sudo', 'get-pip.py'], shell=True)
-subprocess.call(['sudo', 'unixscript.sh'], shell=True)
+subprocess.call([sys.executable, 'sudo', 'distribute_setup.py'])
+subprocess.call([sys.executable, 'sudo', 'get-pip.py'])
+subprocess.call(['sudo', '-s', 'unixscript.sh'], shell=True)  # tries running in its own shell
+# subprocess.call(['sudo','./unixscript.sh'], shell=True)#tries with bash

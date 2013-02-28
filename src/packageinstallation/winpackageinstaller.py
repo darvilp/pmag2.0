@@ -32,8 +32,10 @@ pipscript.writelines('pip install http://sourceforge.net/projects/matplotlib/fil
 pipscript.close()
 
 import subprocess
-subprocess.call(['distribute_setup.py'], shell=True)
-subprocess.call(['get-pip.py'], shell=True)
+subprocess.call([sys.executable, 'distribute_setup.py'])
+print '-------------------------------------------------------------'
+subprocess.call([sys.executable, 'get-pip.py'])
+print '-------------------------------------------------------------'
 subprocess.call(['packageinstaller.bat'], shell=True)
 
 
