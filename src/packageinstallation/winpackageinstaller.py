@@ -5,7 +5,7 @@ This python script works in conjunction with pip to automatically download
 and install the packages that paleomag2.0 uses. 
 @author: payne
 '''
-import os
+
 import urllib2
 
 # downloads and installs distribute
@@ -27,7 +27,7 @@ localFile.close()
 import sys
 pipscript = open("packageinstaller.bat", 'w')
 pipscript.writelines('cd ' + sys.executable.rstrip('python.exe') + "scripts\\\n")
-pipscript.writelines('pip install matplotlib numpy scipy pypdf sphinx reportlab\n')
+pipscript.writelines('pip install numpy matplotlib scipy ipython pypdf sphinx reportlab\n')
 pipscript.writelines('pip install http://sourceforge.net/projects/matplotlib/files/matplotlib-toolkits/basemap-1.0.6/basemap-1.0.6.tar.gz/download')
 pipscript.close()
 
